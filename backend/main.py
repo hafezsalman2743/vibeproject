@@ -4,18 +4,15 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# 1. Add CORS middleware to allow requests from the React (Vite) frontend
+# 1. Add CORS middleware to allow requests from any origin (Update with specific Vercel URL to restrict later)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5000",
-        "http://192.168.29.107:5000"
-    ],  # Vite and Express ports
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # 2. Define the input data structures using Pydantic
 class PredictRequest(BaseModel):
