@@ -13,6 +13,18 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+// Check if configuration is missing (only in development)
+if (import.meta.env.DEV) {
+    const missingKeys = Object.entries(firebaseConfig)
+        .filter(([key, value]) => !value && key !== 'measurementId')
+        .map(([key]) => key);
+
+    if (missingKeys.length > 0) {
+        console.error(`Firebase configuration missing: ${missingKeys.join(', ')}. Check your .env file.`);
+    }
+}
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
