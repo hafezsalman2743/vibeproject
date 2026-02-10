@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/myenv/
+.env
+
+# Build outputs
+dist/
+frontend/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
