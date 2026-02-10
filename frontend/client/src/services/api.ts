@@ -11,9 +11,11 @@ export interface MarksResponse {
   error?: string;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 export const predict = async (input: string): Promise<PredictionResponse> => {
   try {
-    const response = await fetch('http://localhost:8000/predict', {
+    const response = await fetch(`${API_BASE_URL}/predict`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ export const predict = async (input: string): Promise<PredictionResponse> => {
 
 export const checkMarks = async (marks: number): Promise<MarksResponse> => {
   try {
-    const response = await fetch('http://localhost:8000/check-marks', {
+    const response = await fetch(`${API_BASE_URL}/check-marks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

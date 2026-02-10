@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "public": true,
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/frontend/client/index.html"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "/frontend/client/index.html",
+            "permanent": true
+        }
+    ]
+}
