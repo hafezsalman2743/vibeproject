@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { LogOut, User as UserIcon } from "lucide-react";
+import { MarksChecker } from "@/components/MarksChecker";
 
 export default function Home() {
   const { user, logout } = useAuth();
@@ -50,33 +51,40 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="w-full max-w-4xl flex flex-col items-center gap-8 mb-20">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center space-y-4"
-        >
-          <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase mb-2">
-            Beta Preview
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">
-            AI Predictor
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
-            Welcome, <span className="text-foreground font-medium">{user?.email?.split('@')[0]}</span>.
-            Start getting intelligent predictions now.
-          </p>
-        </motion.div>
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-12 mb-20">
+        <div className="flex flex-col items-center gap-8 order-2 lg:order-1">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center space-y-4"
+          >
+            <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase mb-2">
+              Beta Preview
+            </div>
+            <h1 className="text-5xl font-bold tracking-tight text-foreground">
+              AI Predictor
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
+              Welcome, <span className="text-foreground font-medium">{user?.email?.split('@')[0]}</span>.
+              Start getting intelligent predictions now.
+            </p>
+          </motion.div>
 
-        <div className="w-full mt-8">
-          <AIInput onSubmit={handlePredict} isLoading={isLoading} />
+          <div className="w-full mt-4">
+            <AIInput onSubmit={handlePredict} isLoading={isLoading} />
+          </div>
+
+          <div className="w-full min-h-[200px]">
+            <AIResponse response={response} error={error} />
+          </div>
         </div>
 
-        <div className="w-full min-h-[200px]">
-          <AIResponse response={response} error={error} />
+        <div className="flex flex-col items-center justify-center order-1 lg:order-2">
+          <MarksChecker />
         </div>
       </div>
+
 
       <motion.footer
         initial={{ opacity: 0 }}
